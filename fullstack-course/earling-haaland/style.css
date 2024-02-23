@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+body {
+    background-color: antiquewhite;
+    font-family: "Arial Black", sans-serif;
+    font-size: 20px;
+}
+
+h1 {
+    font-size: 30px;
+    color: darkred;
+}
+
+#haaland-profile {
+    border: 10px solid brown;
+}
+
+.even {
+    background: lightpink;
+}
+
+.odd {
+    background: lavenderblush;
+}
+
+aside {
+    background: deeppink;
+    display: inline-block;
+    float: right;
+}
