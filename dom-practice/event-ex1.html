@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible"
+	      content="ie=edge">
+	<title>event ex1</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>Header 1</th>
+				<th>Header 2</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Data 1</td>
+				<td>Data 2</td>
+				<td>Data 3</td>
+			</tr>
+			<tr>
+				<td>Data 3</td>
+				<td>Data 4</td>
+				<td>Data 5</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+<script>
+	const tds = document.querySelectorAll('td');
+	tds.forEach(td => {
+		td.addEventListener('click', (e) => {
+			console.log(e.target.textContent);
+		})
+	})
+</script>
+</html>

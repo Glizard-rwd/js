@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible"
+	      content="ie=edge">
+	<title>DOM manipulation ex3</title>
+</head>
+<body>
+	<script>
+		const p = document.createElement('p');
+		p.textContent = 'This is paragraph';
+		const div = document.createElement('div');
+		const label = document.createElement('label');
+		const input = document.createElement('input');
+		label.textContent = 'Info:'
+		div.prepend(input);
+		div.prepend(label);
+		const nav = document.createElement('nav');
+		const ul = document.createElement('ul');
+		const li = document.createElement('li');
+		li.textContent = 'li1';
+		const li1 = document.createElement('li');
+		li1.textContent = 'li2';
+		const li2 = document.createElement('li');
+		li2.textContent = 'li3';
+		nav.append(ul);
+		ul.append(li)
+		ul.append(li1);
+		ul.append(li2);
+
+		let elements = [p, div, nav];
+
+		setInterval(() => {
+			const random = Math.floor(Math.random() * elements.length);
+
+			// clear the out the body
+			while (document.body.firstChild) {
+				document.body.firstChild.remove();
+			}
+
+			// add random element to the body
+			document.body.append(elements[random]);
+		}, 1000);
+	</script>
+</body>
+</html>

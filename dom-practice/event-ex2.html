@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible"
+	      content="ie=edge">
+	<title>Event ex2</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>Head 1</th>
+				<th>Head 2</th>
+				<th>Head 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>data 1</td>
+				<td>data 2</td>
+				<td>data 3</td>
+			</tr>
+
+			<tr>
+				<td>data 4</td>
+				<td>data 5</td>
+				<td>data 6</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+<script>
+	const tbody = document.querySelector('tbody');
+	tbody.addEventListener('click', (e) => {
+		console.log(e.target.textContent);
+		console.log(e.eventPhase)
+	});
+
+	// use the capture phase
+	tbody.addEventListener('click', (e) => {
+		console.log("Capture!");
+		console.log(e.eventPhase)
+		// e.stopPropagation()
+
+	}, {capture: true});
+
+
+</script>
+</html>

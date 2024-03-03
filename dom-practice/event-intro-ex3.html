@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible"
+	      content="ie=edge">
+	<title>Event intro ex3</title>
+</head>
+<body>
+	<button>Play!</button>
+	<p class="win" hidden>You're lucky</p>
+	<p class="lost" hidden>Better luck next time</p>
+
+	<script>
+
+		// toggleAttribute does not ensure that the browser only display one message
+		// use combo remove+setAttribute
+		const button = document.querySelector('button');
+		const generateRandomNumber = () => {
+			let randomNumber = Math.floor(Math.random()*10+1);
+			console.log(randomNumber);
+			if (randomNumber > 7) {
+				button.addEventListener('click', ()=> {
+					const pWin = document.querySelector('.win');
+					// pWin.toggleAttribute('hidden');
+					pWin.removeAttribute('hidden');
+					const pLost = document.querySelector('.lost');
+					pLost.setAttribute('hidden', '');
+				})
+			} else {
+				button.addEventListener('click', ()=> {
+					const pLost = document.querySelector('.lost');
+					// pLost.toggleAttribute('hidden');
+					// pWin.toggleAttribute('hidden');
+					pLost.removeAttribute('hidden');
+					const pWin = document.querySelector('.win');
+					pWin.setAttribute('hidden', '');
+				})
+			}
+		}
+
+		button.onclick = generateRandomNumber;
+
+
+	</script>
+</body>
+</html>

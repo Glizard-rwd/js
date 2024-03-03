@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible"
+	      content="ie=edge">
+	<title>event warm up exercise</title>
+</head>
+<body>
+	<ul>
+		<li>Home</li>
+		<li>About</li>
+		<li>Team</li>
+	</ul>
+</body>
+<script>
+	const lis = document.querySelectorAll('li'); // list of li
+	lis.forEach(li => {
+		li.addEventListener('click', (e) => {
+			// console.log(e.target.textContent);
+			console.log(li.textContent);
+		})
+	})
+</script>
+</html>
