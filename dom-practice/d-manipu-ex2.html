@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible"
+	      content="ie=edge">
+	<title>DOM Manipulation ex2</title>
+</head>
+<body>
+	<script>
+		// input: text, object (id, class)
+		// output: paragraph element: text, id=, class=
+		// can use Object.entries
+		let attributeObj = {
+			id: 'one',
+			class: 'big'
+		}
+
+		let attributeObj2 = {
+			id: 'two',
+			class: 'medium'
+		}
+
+		let attributeObj3 = {
+			id: 'three',
+			class: 'large'
+		}
+
+		function createParagraph(text, attributes = {}) {
+			const pElement = document.createElement('p');
+			pElement.textContent = text;
+			for (const [key, value] of Object.entries(attributes)) {
+				pElement.setAttribute(key, value);
+			}
+			return pElement;
+		}
+
+		let p1 = createParagraph('Hello', attributeObj);
+		let p2 = createParagraph('Hello2', attributeObj2);
+		let p3 = createParagraph('Hello3', attributeObj3);
+
+		document.body.append(p1);
+		document.body.append(p2);
+		document.body.append(p3);
+	</script>
+</body>
+</html>

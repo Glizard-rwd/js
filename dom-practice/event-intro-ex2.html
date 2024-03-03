@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible"
+	      content="ie=edge">
+	<title>Event intro exercise 1</title>
+</head>
+<body>
+	<button>
+		Show secret
+	</button>
+	<p hidden>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, aliquid consequatur eum ex harum in ipsa ipsum, laboriosam laudantium libero nihil omnis perspiciatis placeat quaerat quis tempore veniam. Dolorum, laudantium.
+	</p>
+	<script>
+		const button = document.querySelector('button');
+		button.addEventListener('click', ()=> {
+			const p = document.querySelector('p');
+			p.toggleAttribute('hidden');
+		})
+	</script>
+</body>
+</html>

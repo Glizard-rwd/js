@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible"
+	      content="ie=edge">
+	<title>Exercise 1: DOM manipulation!</title>
+</head>
+<body>
+<h1>Welcome to the DOM manipulation warm up!</h1>
+</body>
+<script>
+	// add element to the body
+	const p = document.createElement('p');
+	p.textContent = 'Hello there, nice <strong>to meet</strong> you!'
+	const firstText = document.createTextNode('Hello there, nice ');
+	const strongElement = document.createElement('strong');
+	strongElement.textContent = 'to meet';
+	const secondElement = document.createTextNode(' you');
+	document.body.append(firstText)
+	document.body.append(strongElement);
+	document.body.append(secondElement);
+	p.setAttribute('id', 'intro');
+</script>
+</html>
