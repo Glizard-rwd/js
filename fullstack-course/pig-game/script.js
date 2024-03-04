@@ -1,133 +1,84 @@
 'use strict';
 
+let player1El = document.querySelector('.player--0');
+let player2El = document.querySelector('.player--1');
+let currentScore1El = document.querySelector('#current--0');
+let currentScore2El = document.querySelector('#current--1');
+let totalScore1El = document.querySelector('#score--0');
+let totalScore2El = document.querySelector('#score--1');
+let diceEL = document.querySelector('.dice');
 
-const ONE = 1;
-const TWO = 2;
-const THREE = 3;
-const FOUR = 4;
-const FIVE = 5;
-const SIX = 6;
-
-
-let currentPlayer = document.querySelector('#name--0').textContent;
-let currentScore1 = document.querySelector('#current--0');
-let currentScore2 = document.querySelector('#current--1');
-let totalScore1 = document.querySelector('#score--0');
-let totalScore2 = document.querySelector('#score--1');
-
-console.log(currentPlayer)
-console.log(currentScore1, totalScore1);
-console.log(currentScore2, totalScore2);
 
 const btnNewGame = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
-console.log(btnNewGame);
-console.log(btnRoll);
-console.log(btnHold);
 
-btnNewGame.addEventListener('click', ()=> {
-    resetScore();
-})
+let activePlayer = 0;
+let currentScore = 0;
+let totalScores = [0, 0];
+let isPlaying = true;
 
-btnRoll.addEventListener('click', ()=> {
-    const random = Math.floor(Math.random() * 6 + 1);
-    const img = document.querySelector('.dice');
-    let imgSrc = `dice-${random}.png`;
-    img.setAttribute('src', imgSrc);
-    // a function to display dice image
-    if (random === 1) {
-        resetCurrentScore(currentPlayer)
-        currentPlayer = switchPlayer(currentPlayer);
-        // a function to reset currentScore = 0
-    } else {
-        addToCurrentScore(currentPlayer, random)
-    }
-
-})
+btnNewGame.addEventListener('click', reset);
+btnRoll.addEventListener('click', rollDice);
+btnHold.addEventListener('click', holdScore);
 
 
-btnHold.addEventListener('click', () => {
-    holdScore(currentPlayer);
-})
-
-//
-
-
-function switchPlayer(currentPlayer) {
-    if (currentPlayer === 'Player 1') {
-        return document.querySelector('#name--1').textContent;
-    } else {
-        return document.querySelector('#name--0').textContent;
-    }
+function switchPlayer() {
+    document.getElementById(`current--${activePlayer}`).textContent = 0;
+    currentScore = 0;
+    activePlayer = (activePlayer === 0)? 1: 0;
+    player1El.classList.toggle('player--active');
+    player2El.classList.toggle('player--active');
 }
 //
-function addToCurrentScore(curPlayer, randomScore) {
-    if (curPlayer === 'Player 1') {
-        currentScore1.textContent = Number(currentScore1.textContent) + randomScore;
-        console.log(currentScore1.textContent);
-
-    }
-    else {
-        currentScore2.textContent = Number(currentScore2.textContent) + randomScore;
-        console.log(currentScore2.textContent);
-    }
-}
-
-function holdScore(curPlayer) {
-    if (curPlayer === 'Player 1') {
-       totalScore1.textContent = Number(totalScore1.textContent) + Number(currentScore1.textContent);
-        console.log(totalScore1.textContent);
-    } else {
-        totalScore2.textContent = Number(totalScore2.textContent) + Number(currentScore2.textContent);
-        console.log(totalScore2.textContent);
-    }
-
-    resetCurrentScore(curPlayer);
-
-    if (Number(totalScore1.textContent) >= 100) {
-        alert('Player 1 wins!');
-    }
-    else if (Number(totalScore2.textContent) >= 100) {
-        alert('Player2 wins!');
-    }
-    else {
-        currentPlayer = switchPlayer(currentPlayer);
+function rollDice() {
+    if (isPlaying) {
+        const random = Math.floor(Math.random() * 6 + 1);
+        const img = document.querySelector('.dice');
+        let imgSrc = `dice-${random}.png`;
+        img.setAttribute('src', imgSrc);
+        // a function to display dice image
+        if (random === 1) {
+            switchPlayer();
+            // a function to reset currentScore = 0
+        } else {
+            currentScore += random;
+            document.getElementById(`current--${activePlayer}`).textContent = currentScore;
+        }
     }
 }
+function holdScore() {
+    if (isPlaying) {
+        totalScores[activePlayer] += currentScore;
+        document.getElementById(`score--${activePlayer}`).textContent = totalScores[activePlayer];
 
-function resetScore() {
-    currentPlayer = document.querySelector('#name--0');
-    resetCurrentScore('Player 1');
-    resetCurrentScore('Player 2');
-    resetTotalScore('Player 1');
-    resetTotalScore('Player 2');
-}
-
-function resetCurrentScore(curPlayer) {
-    if (curPlayer === 'Player 1') {
-        currentScore1.textContent = '0';
-    } else {
-        currentScore2.textContent = '0';
+        if (totalScores[activePlayer] >= 100) {
+            isPlaying = false;
+            diceEL.classList.add('hidden');
+            document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+            document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+        }
+        else {
+            switchPlayer();
+        }
     }
+
 }
 
-function resetTotalScore(curPlayer) {
-    if (curPlayer === 'Player 1') {
-        totalScore1.textContent = '0';
-    } else {
-        totalScore2.textContent = '0';
-    }
-}
-//
-// function resetScore() {
-//     currentPlayer = document.querySelector('#name--0');
-//     totalScore1.textContent = '0';
-//     totalScore2.textContent = '0';
-//     currentScore1.textContent = '0';
-//     currentScore2.textContent = '0';
-// }
-//
-//
+function reset() {
+    activePlayer = 0;
+    currentScore = 0;
+    totalScores = [0, 0];
+    isPlaying = true;
 
-console.log(currentPlayer)
+    currentScore1El.textContent = 0;
+    currentScore2El.textContent = 0;
+    totalScore1El.textContent = 0;
+    totalScore2El.textContent = 0;
+
+    // other later
+    player1El.classList.remove('player--winner');
+    player2El.classList.remove('player--winner');
+    player1El.classList.add('player--active');
+    player2El.classList.remove('player--active');
+}
